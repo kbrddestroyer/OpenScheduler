@@ -17,6 +17,8 @@ qt_standard_project_setup()
 
 add_subdirectory(client)
 
+qt_add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
+
 set_target_properties(${PROJECT_NAME}
     PROPERTIES
         WIN32_EXECUTABLE TRUE
