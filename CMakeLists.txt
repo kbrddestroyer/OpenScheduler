@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
-project(OpenScheduler LANGUAGES CXX)
 
+project(OpenSchedulerClient LANGUAGES CXX)
 include(qt.cmake)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -15,14 +15,7 @@ find_package(Qt${QT_VERSION_MAJOR}
 )
 qt_standard_project_setup()
 
-set(PROJECT_SOURCES
-    main.cpp
-    OpenScheduler.ui
-    OpenScheduler.h
-    OpenScheduler.cpp
-)
-
-qt_add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
+add_subdirectory(client)
 
 set_target_properties(${PROJECT_NAME}
     PROPERTIES
@@ -35,4 +28,3 @@ target_link_libraries(${PROJECT_NAME}
         Qt::Gui
         Qt::Widgets
 )
-
