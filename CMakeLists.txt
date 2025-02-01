@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(OpenSchedulerClient LANGUAGES CXX)
+project(OpenScheduler LANGUAGES CXX)
 include(qt.cmake)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -16,17 +16,3 @@ find_package(Qt${QT_VERSION_MAJOR}
 qt_standard_project_setup()
 
 add_subdirectory(client)
-
-qt_add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
-
-set_target_properties(${PROJECT_NAME}
-    PROPERTIES
-        WIN32_EXECUTABLE TRUE
-)
-
-target_link_libraries(${PROJECT_NAME}
-    PUBLIC
-        Qt::Core
-        Qt::Gui
-        Qt::Widgets
-)
