@@ -47,7 +47,7 @@
           </property>
          </spacer>
         </item>
-        <item alignment="">
+        <item>
          <widget class="QLabel" name="label">
           <property name="text">
            <string>Login</string>
@@ -58,14 +58,14 @@
          </widget>
         </item>
         <item alignment="">
-         <widget class="QLineEdit" name="lineEdit">
+         <widget class="QLineEdit" name="login">
           <property name="placeholderText">
            <string>Login</string>
           </property>
          </widget>
         </item>
         <item alignment="">
-         <widget class="QLineEdit" name="lineEdit_2">
+         <widget class="QLineEdit" name="password">
           <property name="echoMode">
            <enum>QLineEdit::EchoMode::Password</enum>
           </property>
@@ -74,8 +74,8 @@
           </property>
          </widget>
         </item>
-        <item alignment="">
-         <widget class="QPushButton" name="pushButton">
+        <item alignment="|Qt::AlignmentFlag::AlignVCenter">
+         <widget class="QPushButton" name="loginBtn">
           <property name="text">
            <string>Login</string>
           </property>

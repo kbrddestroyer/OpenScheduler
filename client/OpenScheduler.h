@@ -10,6 +10,8 @@ class OpenScheduler : public QMainWindow
 public:
     OpenScheduler(QWidget *parent = nullptr);
     ~OpenScheduler();
+private:
+    void handleButtonPressEvent();
 
 private:
     Ui::OpenSchedulerClass ui;
