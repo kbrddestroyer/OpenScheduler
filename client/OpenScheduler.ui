@@ -57,14 +57,14 @@
           </property>
          </widget>
         </item>
-        <item alignment="">
+        <item>
          <widget class="QLineEdit" name="login">
           <property name="placeholderText">
            <string>Login</string>
           </property>
          </widget>
         </item>
-        <item alignment="">
+        <item>
          <widget class="QLineEdit" name="password">
           <property name="echoMode">
            <enum>QLineEdit::EchoMode::Password</enum>
@@ -74,7 +74,7 @@
           </property>
          </widget>
         </item>
-        <item alignment="|Qt::AlignmentFlag::AlignVCenter">
+        <item>
          <widget class="QPushButton" name="loginBtn">
           <property name="text">
            <string>Login</string>
