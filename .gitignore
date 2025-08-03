@@ -21,6 +21,7 @@ CMakeUserPresets.json
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
 # User-specific files
+
 *.rsuser
 *.suo
 *.user
@@ -415,3 +416,17 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Generated
+[Cc][Mm]ake-build/
+[Cc][Mm]ake-build-*/
+.idea/
+.venv/
+venv/
+env/
+.env/
+pyenv/
+*.puc
+
+# Conan output
+conan/
