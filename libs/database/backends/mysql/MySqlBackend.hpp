@@ -2,12 +2,9 @@
 #define MYSQLBACKEND_HPP
 
 #include <Backend.hpp>
-#include <cppconn/driver.h>
-#include <cppconn/exception.h>
-#include <cppconn/resultset.h>
-#include <cppconn/statement.h>
 
 #include <memory>
+#include <cppconn/driver.h>
 
 namespace Database::MySQL {
 
@@ -19,6 +16,8 @@ public:
     bool connect(const Host& host) override;
     void disconnect() override;
     bool isConnected() override;
+
+    sql::Driver * getDriver() const { return driver; }
 private:
     sql::Driver *driver = nullptr;
     std::unique_ptr<sql::Connection> connection;
