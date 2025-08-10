@@ -1,24 +1,37 @@
 #ifndef BACKEND_HPP
 #define BACKEND_HPP
 
-#include "Host.hpp"
+#include <string>
+#include <memory>
+#include <vector>
+#include <cppconn/driver.h>
+#include <cppconn/resultset.h>
 
 namespace Database {
+    struct Host {
+        std::string hostname;
+        std::string username;
+        std::string password;
+        std::string dbname;
+    };
 
-/**
- *  Abstraction level for database connector library
- */
-class Backend {
-public:
-    virtual ~Backend() = default;
+    class DAOBase {
+    public:
+        virtual ~DAOBase() = default;
+    };
 
-    virtual bool connect(const Host& host) = 0;
-    virtual void disconnect() = 0;
-    virtual bool isConnected() = 0;
-protected:
-    bool connected = false;
-};
+    class Backend {
+    public:
+        virtual ~Backend() = default;
 
-} // Database
+        bool connect(const Host &);
+        template <typename K, class DAO>
+        DAOBase * getByID(const std::string&, const std::string&, K key);
+    protected:
+        sql::Driver * driver = nullptr;
+        std::unique_ptr<sql::Connection> connection;
+    };
+}
 
+#include "Backend.ipp"
 #endif //BACKEND_HPP
