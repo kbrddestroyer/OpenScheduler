@@ -6,4 +6,5 @@ if (POLICY CMP0140)
 endif()
 
 include (cmake/build_utils.cmake)
+include_directories(${CMAKE_HOME_DIRECTORY}/include)
 add_all_subdirs()
