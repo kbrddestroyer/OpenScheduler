@@ -5,6 +5,11 @@
 #ifndef MYSQL_CONFIG_HPP
 #define MYSQL_CONFIG_HPP
 
+/*
+ * Just for test purposes.
+ * Please, do not expose your passwords to public and be careful!
+ */
+
 #define MYSQL_HOSTNAME "localhost"
 #define MYSQL_USER "root"
 #define MYSQL_PASSWORD "root"

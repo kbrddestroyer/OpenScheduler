@@ -2,13 +2,13 @@
 #define TESTDAO_HPP
 
 #include <string>
-#include <Backend.hpp>
+#include <Database.hpp>
 
 
 class TestDAO final : public Database::DAOBase {
 public:
     TestDAO() = delete;
-    TestDAO(const sql::ResultSet * rs) :
+    explicit TestDAO(const sql::ResultSet * rs) :
         id (rs->getInt("id")),
         name(rs->getString("name")) {}
 

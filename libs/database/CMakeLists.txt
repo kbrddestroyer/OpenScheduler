@@ -1,5 +1,7 @@
 project (OpenScheduler.libs.database)
 
+include(${CMAKE_HOME_DIRECTORY}/cmake/mysql-connector-win.cmake)
+
 list_all_sources(SOURCES)
 add_library(database STATIC ${SOURCES})
 
