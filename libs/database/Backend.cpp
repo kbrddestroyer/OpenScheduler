@@ -29,4 +29,9 @@ namespace Database {
         sql::Statement *stmt = connection->createStatement();
         return std::shared_ptr<sql::ResultSet>( stmt->executeQuery(query.data()) );
     }
+
+    uint32_t Backend::executeUpdate(const std::string_view &query) const {
+        sql::Statement *stmt = connection->createStatement();
+        return stmt->executeQuery(query.data())->rowsCount();
+    }
 }

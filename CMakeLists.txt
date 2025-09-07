@@ -5,6 +5,9 @@ if (POLICY CMP0140)
     cmake_policy(SET CMP0140 NEW)
 endif()
 
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 include (cmake/build_utils.cmake)
 include_directories(${CMAKE_HOME_DIRECTORY}/include)
 add_all_subdirs()

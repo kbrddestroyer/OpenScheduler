@@ -20,6 +20,7 @@ namespace Database {
     public:
         bool connect(const Host &);
         [[nodiscard]] std::shared_ptr<sql::ResultSet> executeQuery(const std::string_view&) const;
+        [[nodiscard]] uint32_t executeUpdate(const std::string_view&) const;
     protected:
         sql::Driver * driver = nullptr;
         std::unique_ptr<sql::Connection> connection;

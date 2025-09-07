@@ -33,3 +33,18 @@ TEST(INTEGRATION_DATABASE, MYSQL_SELECT_BY_PRIMARY) {
     ASSERT_TRUE(dao.get());
     ASSERT_STREQ("name", dao->getName().c_str());
 }
+
+TEST(INTEGRATION_DATABASE, MYSQL_UPDATE_BY_ID) {
+    auto backend = Utils::Singleton<Database::Backend>::instance();
+    Database::Host host = {
+        "localhost:3306",
+        "root",
+        "root",
+        "unit_tests"
+    };
+
+    ASSERT_TRUE(backend->connect(host));
+
+    const auto dao = TestDAO(1, "new_name");
+    ASSERT_TRUE(Database::QueryProcessor<TestDAO>::insert("unit_test", dao));
+}
