@@ -5,6 +5,9 @@
 
 namespace Database {
     bool Backend::connect(const Host &host) {
+        if (driver)  // Already connected
+            return connection->isValid();
+
         driver = get_driver_instance();
 
         if (!driver)
@@ -32,6 +35,6 @@ namespace Database {
 
     uint32_t Backend::executeUpdate(const std::string_view &query) const {
         sql::Statement *stmt = connection->createStatement();
-        return stmt->executeQuery(query.data())->rowsCount();
+        return stmt->executeUpdate(query.data());
     }
 }

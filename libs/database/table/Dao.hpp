@@ -6,7 +6,7 @@ namespace Database {
 struct DAOBase {
     virtual ~DAOBase() = default;
 
-    [[nodiscard]] virtual std::string getUpdateQuery() const = 0;
+    [[nodiscard]] virtual const std::string getUpdateQuery() const = 0;
 };
 
 } // Database

@@ -4,8 +4,8 @@
 
 
 TEST(INTEGRATION_DATABASE, MYSQL_BASIC_TEST) {
-    auto backend = Utils::Singleton<Database::Backend>::instance();
-    Database::Host host = {
+    const auto backend = Utils::Singleton<Database::Backend>::instance();
+    const Database::Host host = {
         "localhost:3306",
         "root",
         "root",
@@ -19,8 +19,8 @@ TEST(INTEGRATION_DATABASE, MYSQL_BASIC_TEST) {
 
 
 TEST(INTEGRATION_DATABASE, MYSQL_SELECT_BY_PRIMARY) {
-    auto backend = Utils::Singleton<Database::Backend>::instance();
-    Database::Host host = {
+    const auto backend = Utils::Singleton<Database::Backend>::instance();
+    const Database::Host host = {
         "localhost:3306",
         "root",
         "root",
@@ -35,8 +35,8 @@ TEST(INTEGRATION_DATABASE, MYSQL_SELECT_BY_PRIMARY) {
 }
 
 TEST(INTEGRATION_DATABASE, MYSQL_UPDATE_BY_ID) {
-    auto backend = Utils::Singleton<Database::Backend>::instance();
-    Database::Host host = {
+    const auto backend = Utils::Singleton<Database::Backend>::instance();
+    const Database::Host host = {
         "localhost:3306",
         "root",
         "root",
@@ -47,4 +47,19 @@ TEST(INTEGRATION_DATABASE, MYSQL_UPDATE_BY_ID) {
 
     const auto dao = TestDAO(1, "new_name");
     ASSERT_TRUE(Database::QueryProcessor<TestDAO>::insert("unit_test", dao));
+}
+
+TEST(INTEGRATION_DATABASE, MYSQL_DELETE_BY_KEY) {
+    const auto backend = Utils::Singleton<Database::Backend>::instance();
+    const Database::Host host = {
+        "localhost:3306",
+        "root",
+        "root",
+        "unit_tests"
+    };
+
+    ASSERT_TRUE(backend->connect(host));
+
+    const auto rs = Database::QueryProcessor<TestDAO>::select("unit_test");
+    ASSERT_TRUE(Database::QueryProcessor<TestDAO>::deleteByKey("unit_test", "id", rs[1].getID()));
 }

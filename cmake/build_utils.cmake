@@ -12,7 +12,7 @@ endfunction()
 
 
 function(list_all_sources result)
-    file(GLOB_RECURSE SOURCES "*.c" "*.h" "*.cpp" "*.hpp")
+    file(GLOB_RECURSE SOURCES "*.c" "*.h" "*.cpp" "*.hpp" "*.ipp")
 
     set (${result} ${SOURCES})
     return (PROPAGATE ${result})
