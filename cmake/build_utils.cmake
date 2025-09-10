@@ -12,14 +12,14 @@ endfunction()
 
 
 function(list_all_sources result)
-    file(GLOB_RECURSE SOURCES "*.c" "*.h" "*.cpp" "*.hpp")
+    file(GLOB_RECURSE SOURCES "*.c" "*.h" "*.cpp" "*.hpp" "*.ipp")
 
     set (${result} ${SOURCES})
     return (PROPAGATE ${result})
 endfunction()
 
 
-function(list_all_tests name_pattern)
+function(list_all_tests name_pattern target_name_return)
     file (GLOB_RECURSE TEST_SOURCES ${name_pattern})
     get_filename_component(FOLDER ${CMAKE_CURRENT_SOURCE_DIR} NAME_WE)
     string (TOUPPER ${FOLDER} FOLDER)
@@ -34,4 +34,7 @@ function(list_all_tests name_pattern)
     )
 
     message ("Loaded test folder: TEST_${FOLDER}")
+
+    set (${target_name_return} TEST_${FOLDER}_TARGET)
+    return (PROPAGATE ${target_name_return})
 endfunction()

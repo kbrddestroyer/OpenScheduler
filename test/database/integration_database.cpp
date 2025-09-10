@@ -1,23 +1,65 @@
 #include <gtest/gtest.h>
 #include <Database.hpp>
-#include <Backend.hpp>
-
 #include "TestDao.hpp"
 
 
 TEST(INTEGRATION_DATABASE, MYSQL_BASIC_TEST) {
-    Database::Backend backend;
-    Database::Host host = {
+    const auto backend = Utils::Singleton<Database::Backend>::instance();
+    const Database::Host host = {
         "localhost:3306",
         "root",
         "root",
         "unit_tests"
     };
 
-    ASSERT_TRUE(backend.connect(host));
+    ASSERT_TRUE(backend->connect(host));
+    const auto result = Database::QueryProcessor<TestDAO>::select("unit_test");
+    ASSERT_GT(result.size(), 0);
+}
 
-    Database::DAOBase * dao = backend.getByID<uint32_t, TestDAO>("unit_test", "id", 0);
-    TestDAO * testDao = dynamic_cast<TestDAO*>(dao);
-    ASSERT_TRUE(testDao);
-    ASSERT_STREQ("name", testDao->getName().c_str());
+
+TEST(INTEGRATION_DATABASE, MYSQL_SELECT_BY_PRIMARY) {
+    const auto backend = Utils::Singleton<Database::Backend>::instance();
+    const Database::Host host = {
+        "localhost:3306",
+        "root",
+        "root",
+        "unit_tests"
+    };
+
+    ASSERT_TRUE(backend->connect(host));
+
+    const auto dao = Database::QueryProcessor<TestDAO>::selectByPK<int>("unit_test", "id", 0);
+    ASSERT_TRUE(dao.get());
+    ASSERT_STREQ("name", dao->getName().c_str());
+}
+
+TEST(INTEGRATION_DATABASE, MYSQL_UPDATE_BY_ID) {
+    const auto backend = Utils::Singleton<Database::Backend>::instance();
+    const Database::Host host = {
+        "localhost:3306",
+        "root",
+        "root",
+        "unit_tests"
+    };
+
+    ASSERT_TRUE(backend->connect(host));
+
+    const auto dao = TestDAO(1, "new_name");
+    ASSERT_TRUE(Database::QueryProcessor<TestDAO>::insert("unit_test", dao));
+}
+
+TEST(INTEGRATION_DATABASE, MYSQL_DELETE_BY_KEY) {
+    const auto backend = Utils::Singleton<Database::Backend>::instance();
+    const Database::Host host = {
+        "localhost:3306",
+        "root",
+        "root",
+        "unit_tests"
+    };
+
+    ASSERT_TRUE(backend->connect(host));
+
+    const auto rs = Database::QueryProcessor<TestDAO>::select("unit_test");
+    ASSERT_TRUE(Database::QueryProcessor<TestDAO>::deleteByKey("unit_test", "id", rs[1].getID()));
 }

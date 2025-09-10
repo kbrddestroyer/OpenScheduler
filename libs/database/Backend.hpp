@@ -3,8 +3,9 @@
 
 #include <string>
 #include <memory>
-#include <vector>
 #include <cppconn/driver.h>
+
+#include <Singleton.hpp>
 #include <cppconn/resultset.h>
 
 namespace Database {
@@ -15,23 +16,15 @@ namespace Database {
         std::string dbname;
     };
 
-    class DAOBase {
+    class Backend : Utils::Singleton<Backend> {
     public:
-        virtual ~DAOBase() = default;
-    };
-
-    class Backend {
-    public:
-        virtual ~Backend() = default;
-
         bool connect(const Host &);
-        template <typename K, class DAO>
-        DAOBase * getByID(const std::string&, const std::string&, K key);
+        [[nodiscard]] std::shared_ptr<sql::ResultSet> executeQuery(const std::string_view&) const;
+        [[nodiscard]] uint32_t executeUpdate(const std::string_view&) const;
     protected:
         sql::Driver * driver = nullptr;
         std::unique_ptr<sql::Connection> connection;
     };
 }
 
-#include "Backend.ipp"
 #endif //BACKEND_HPP
