@@ -4,7 +4,7 @@ from conan.tools.cmake import CMakeDeps, CMakeToolchain, CMake
 
 class AxonConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
-    requires = "gtest/1.14.0"
+    requires = [ "gtest/1.14.0", "openssl/3.6.0", ]
 
     def generate(self):
         tc = CMakeToolchain(self, 'Ninja')
