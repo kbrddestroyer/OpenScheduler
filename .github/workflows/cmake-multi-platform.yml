@@ -64,6 +64,21 @@ jobs:
         version:      ${{ env.QT_VERSION }}
         setup-python: false
 
+    - name: Install Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.x'
+
+    - name: Install Ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
+
+    - name: Install conan
+      run: pip install conan
+
+    - name: Configure conan
+      run: |
+        conan profile detect --force
+        
     - name: Conan install
       run: >
         conan install . -s build_type=${{ matrix.build_type }} --build=missing --output-folder=conan/${{ matrix.build_type }}
