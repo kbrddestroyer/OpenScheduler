@@ -1,0 +1,60 @@
+name: Build All
+on:
+  push:
+    branches:
+      - main
+      - release
+      - release/*
+      - feature/*
+      - archive/*
+  pull_request:
+    branches:
+      - main
+      - release
+      - release/*
+      - feature/*
+      - archive/*
+
+
+jobs:
+  build-all:
+    runs-on: windows-latest
+    steps:
+      - name: Install QT
+        uses: jurplel/install-qt-action@v4
+
+      - name: Install Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+
+      - name: Install Ninja
+        uses: seanmiddleditch/gha-setup-ninja@master
+
+      - name: Install conan
+        run: pip install conan
+
+      - name: Configure conan
+        run: |
+          conan profile detect --force
+
+      - name: Conan setup
+        working-directory: ./conan
+        run: conan install . -s build_type="Debud" --build=missing --output-folder=build/Debug
+
+      - name: Configure CMake
+        run: >
+          cmake -B ${{ steps.strings.outputs.build-output-dir }}
+          -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/conan/build/Debug/conan_toolchain.cmake
+          -DCMAKE_CXX_COMPILER=cl
+          -DCMAKE_C_COMPILER=cl
+          -DCMAKE_BUILD_TYPE=Debug
+          -DBUILD_TESTS=ON -DBUILD_EXAMPLES=ON
+          -S ${{ github.workspace }}
+          
+      - name: Build
+        run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config Debug
+
+      - name: Test
+        working-directory: ${{ steps.strings.outputs.build-output-dir }}
+        run: ctest --extra-verbose --build-config Debug
