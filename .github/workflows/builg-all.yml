@@ -39,6 +39,7 @@ jobs:
           conan profile detect --force
 
       - name: Conan setup
+        working-directory: ${{ github.workspace }}
         run: conan install . -s build_type=Debud --build=missing -of conan/build/Debug
 
       - name: Configure CMake
