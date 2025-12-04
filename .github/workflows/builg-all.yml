@@ -39,7 +39,7 @@ jobs:
           conan profile detect --force
 
       - name: Conan setup
-        run: conan install . -s build_type=Debud --build=missing
+        run: conan install . -f conanfile.py -s build_type=Debud --build=missing
 
       - name: Configure CMake
         run: >
