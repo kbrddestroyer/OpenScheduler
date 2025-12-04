@@ -26,6 +26,7 @@ namespace Login {
          *  TODO: Whole login flow refactor when model is switched to client-server
          */
         [[nodiscard]] bool tryLogin(const std::string& /* db_passwd */) const;
+        [[nodiscard]] bool tryRegister() const;
     private:
         const std::unique_ptr<Credentials> credentials_;
     };

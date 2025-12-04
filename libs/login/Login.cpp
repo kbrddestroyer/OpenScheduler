@@ -1,15 +1,18 @@
 #include "Login.hpp"
 
 #include "utils/utility.h"
+#include "CredentialsDao.hpp"
 
 #include <vector>
 #include <sstream>
 #include <iomanip>
 
+#include "table/QueryProcessor.hpp"
+
 namespace Login {
 
     Login::Login(const Credentials &credentials)
-        : credentials(std::make_unique<Credentials>(credentials))
+        : credentials_(std::make_unique<Credentials>(credentials))
     {}
 
     void Login::doHashPassword(const std::string & raw_passwd, std::string & passwd_sha256) noexcept {
@@ -40,6 +43,18 @@ namespace Login {
         );
 
         return db_passwd == hashed_passwd;
+    }
+
+    bool Login::tryRegister() const {
+        std::string hashed_passwd;
+        doHashPassword(credentials_->raw_password, hashed_passwd);
+
+        // TODO: Move database call somewhere else to maintain SOLID
+        const CredentialsDao dao(
+            1, credentials_->username, hashed_passwd
+        );
+
+        return Database::QueryProcessor<CredentialsDao>::insert("test_logins", dao);
     }
 
 } // Login

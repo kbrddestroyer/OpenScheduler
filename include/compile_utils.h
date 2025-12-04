@@ -9,6 +9,8 @@
 
     #if defined(DYNAMIC)
         #define DECLSPEC_AUTO __declspec(dllexport)
+    #elif defined(STATIC)
+        #define DECLSPEC_AUTO
     #else
         #define DECLSPEC_AUTO __declspec(dllimport)
     #endif

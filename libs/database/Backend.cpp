@@ -37,4 +37,11 @@ namespace Database {
         sql::Statement *stmt = connection->createStatement();
         return stmt->executeUpdate(query.data());
     }
+
+    std::shared_ptr<Backend> g_backend_instance() {
+        auto inst = Utils::Singleton<Backend>::instance();
+        std::cout << "Obtaining instance " << inst << " " << inst.use_count() << std::endl;
+        return inst;
+    }
+
 }
