@@ -40,7 +40,7 @@ jobs:
 
       - name: Conan setup
         working-directory: ./conan
-        run: conan install . -s build_type="Debud" --build=missing --output-folder=build/Debug
+        run: conan install . -s build_type="Debud" --build=missing --output-folder={{github.workspace}}/conan/build/Debug
 
       - name: Configure CMake
         run: >
