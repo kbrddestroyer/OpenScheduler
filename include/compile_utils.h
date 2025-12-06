@@ -7,7 +7,7 @@
 
 #if defined(WIN32)
 
-    #if defined(DYNAMIC)
+    #if defined(SHARED)
         #define DECLSPEC_AUTO __declspec(dllexport)
     #elif defined(STATIC)
         #define DECLSPEC_AUTO
