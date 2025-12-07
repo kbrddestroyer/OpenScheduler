@@ -84,12 +84,12 @@ jobs:
         conan install . -s build_type=${{ matrix.build_type }} --build=missing --output-folder=conan/${{ matrix.build_type }}
 
     - name: Install MySQL Connector C++ from web
-      working-directory: ${{github.workspace}}/fetched-libs
+      working-directory: fetched-libs
       run: >
         wget https://downloads.mysql.com/archives/get/p/20/file/mysql-connector-c++-8.4.0-winx64.zip
 
     - name: Install MySQL Connector C++ Debug from web
-      working-directory: ${{github.workspace}}/fetched-libs
+      working-directory: fetched-libs
       run: >
         wget https://downloads.mysql.com/archives/get/p/20/file/mysql-connector-c++-8.4.0-winx64-debug.zip
 
