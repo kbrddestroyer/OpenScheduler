@@ -84,26 +84,24 @@ jobs:
         conan install . -s build_type=${{ matrix.build_type }} --build=missing --output-folder=conan/${{ matrix.build_type }}
 
     - name: Install MySQL Connector C++ from web
-      working-directory: fetched-libs
       run: >
         wget https://downloads.mysql.com/archives/get/p/20/file/mysql-connector-c++-8.4.0-winx64.zip
 
     - name: Install MySQL Connector C++ Debug from web
-      working-directory: fetched-libs
       run: >
         wget https://downloads.mysql.com/archives/get/p/20/file/mysql-connector-c++-8.4.0-winx64-debug.zip
 
     - name: Extract Archive w/ Debug
       uses: ihiroky/extract-action@v1
       with:
-        file_path: ${{github.workspace}}/fetched-libs/mysql-connector-c++-8.4.0-winx64-debug.zip
-        extract_dir: ${{github.workspace}}/fetched-libs
+        file_path: mysql-connector-c++-8.4.0-winx64-debug.zip
+        extract_dir: ${{github.workspace}}
 
     - name: Extract Archive w/ Release
       uses: ihiroky/extract-action@v1
       with:
-        file_path: ${{github.workspace}}/fetched-libs/mysql-connector-c++-8.4.0-winx64.zip
-        extract_dir: ${{github.workspace}}/fetched-libs
+        file_path: mysql-connector-c++-8.4.0-winx64.zip
+        extract_dir: ${{github.workspace}}
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
@@ -114,7 +112,7 @@ jobs:
         -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-        -DMYSQL_CONNECTOR_DIRECTORY="${{github.workspace}}/fetched-libs/mysql-connector-c++-8.4.0-winx64-debug"
+        -DMYSQL_CONNECTOR_DIRECTORY="mysql-connector-c++-8.4.0-winx64-debug"
         -S ${{ github.workspace }}
 
     - name: Build
