@@ -85,11 +85,11 @@ jobs:
 
     - name: Install MySQL Connector C++ from web
       run: >
-        wget https://downloads.mysql.com/archives/get/p/20/file/mysql-connector-c++-8.4.0-winx64.zip
+        curl -L -o mysql-connector-c++-8.4.0-winx64.zip "https://downloads.mysql.com/archives/get/p/20/file/mysql-connector-c++-8.4.0-winx64.zip"
 
     - name: Install MySQL Connector C++ Debug from web
       run: >
-        wget https://downloads.mysql.com/archives/get/p/20/file/mysql-connector-c++-8.4.0-winx64-debug.zip
+        curl -L -o mysql-connector-c++-8.4.0-winx64-debug.zip "https://downloads.mysql.com/archives/get/p/20/file/mysql-connector-c++-8.4.0-winx64-debug.zip"
 
     - name: Extract Archive w/ Debug
       uses: ihiroky/extract-action@v1
