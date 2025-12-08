@@ -94,7 +94,7 @@ jobs:
     - name: Extract Archive w/ Debug
       uses: ihiroky/extract-action@v1
       with:
-        file_path: mysql-connector-c++-8.4.0-winx64-debug.zip
+        file_path: ${{github.workspace}}/mysql-connector-c++-8.4.0-winx64-debug.zip
         extract_dir: ${{github.workspace}}
 
     - name: Extract Archive w/ Release
