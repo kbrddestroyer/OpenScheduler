@@ -112,7 +112,7 @@ jobs:
         -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-        -DMYSQL_CONNECTOR_DIRECTORY="${{github.workspace}}/mysql-connector-c++-8.4.0-winx64-debug"
+        -DMYSQL_CONNECTOR_DIRECTORY="${{github.workspace}}\\mysql-connector-c++-8.4.0-winx64-debug"
         -S ${{ github.workspace }}
 
     - name: Build
