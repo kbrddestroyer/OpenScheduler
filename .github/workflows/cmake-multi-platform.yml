@@ -103,6 +103,12 @@ jobs:
         file_path: mysql-connector-c++-8.4.0-winx64.zip
         extract_dir: ${{github.workspace}}
 
+    - name: Show directory contents
+      run: ls ${{github.workspace}}
+
+    - name: Show mysql dir contents
+      run: ls ${{github.workspace}}/mysql-connector-c++-8.4.0-win64
+
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
