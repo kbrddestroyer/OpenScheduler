@@ -14,13 +14,12 @@ class CredentialsDao final : public Database::DAOBase {
 public:
     CredentialsDao() = delete;
     explicit CredentialsDao(const sql::ResultSet * /* rs */);
-    explicit CredentialsDao(const uint32_t /* id */, const std::string & /* username */, const std::string & /* passwd_sha256 */);
+    explicit CredentialsDao(const std::string & /* username */, const std::string & /* passwd_sha256 */);
 
     [[nodiscard]] const std::string& getUsername() const { return username; }
     [[nodiscard]] const std::string& getHashedPasswd() const { return passwd_sha256; }
     [[nodiscard]] const std::string getUpdateQuery() const override;
 protected:
-    uint32_t id = 0;
     std::string username;
     std::string passwd_sha256;
 };

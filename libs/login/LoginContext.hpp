@@ -1,10 +1,11 @@
 
 #ifndef LOGINCONTEXT_HPP
 #define LOGINCONTEXT_HPP
+#include "Singleton.hpp"
 
 namespace Login {
 
-enum class __login_type {
+enum class LoginType {
     NO_LOGIN,
     USER_RO,
     USER_RW,
@@ -12,9 +13,16 @@ enum class __login_type {
     ADMIN
 };
 
-class LoginContext {
+class LoginContextHolder : Utils::Singleton<LoginContextHolder> {
+public:
+    LoginContextHolder() = default;
+
+    void setContextParams(LoginType, bool);
+
+    [[nodiscard]] LoginType Type() const noexcept { return type_; }
+    [[nodiscard]] bool Ready() const noexcept { return ready_; }
 protected:
-    __login_type    type_ = __login_type::NO_LOGIN;
+    LoginType       type_ = LoginType::NO_LOGIN;
     bool            ready_ = false;
 };
 

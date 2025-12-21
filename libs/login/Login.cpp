@@ -34,15 +34,21 @@ namespace Login {
     }
 
 
-    bool Login::tryLogin(const std::string &db_passwd) const {
+    bool Login::tryLogin() const {
         std::string hashed_passwd;
+
+        const auto dao = Database::QueryProcessor<CredentialsDao>::selectByPK<std::string>(
+            "test_logins",
+            "username",
+            "\'" + this->credentials_->username + "\'"
+            );
 
         doHashPassword(
             credentials_->raw_password,
             hashed_passwd
         );
 
-        return db_passwd == hashed_passwd;
+        return dao->getHashedPasswd() == hashed_passwd;
     }
 
     bool Login::tryRegister() const {
@@ -51,7 +57,7 @@ namespace Login {
 
         // TODO: Move database call somewhere else to maintain SOLID
         const CredentialsDao dao(
-            1, credentials_->username, hashed_passwd
+            credentials_->username, hashed_passwd
         );
 
         return Database::QueryProcessor<CredentialsDao>::insert("test_logins", dao);

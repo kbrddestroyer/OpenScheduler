@@ -6,13 +6,10 @@
 namespace Login {
     CredentialsDao::CredentialsDao(const sql::ResultSet *rs) :
         username(rs->getString("username")),
-        passwd_sha256(rs->getString("passwd_sha256")),
-        id(rs->getInt("id"))
-    {
-    }
+        passwd_sha256(rs->getString("passwd_sha256"))
+    {}
 
-    CredentialsDao::CredentialsDao(const uint32_t id, const std::string &username, const std::string &passwd_sha256) :
-        id(id),
+    CredentialsDao::CredentialsDao(const std::string &username, const std::string &passwd_sha256) :
         username(username),
         passwd_sha256(passwd_sha256)
     {}

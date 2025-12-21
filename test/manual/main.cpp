@@ -29,9 +29,7 @@ int main() {
     std::cout << "Password: ";
     std::cin >> passwd;
 
-    Login::Login login({username, passwd});
-
-    if (login.tryRegister())
+    if (Login::Login login({username, passwd}); login.tryRegister())
         std::cout << "Register success!" << std::endl;
     else
         std::cerr << "Could not register account" << std::endl;
