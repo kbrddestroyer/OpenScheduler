@@ -2,7 +2,7 @@
 #include <QtWidgets/QApplication>
 
 #include <database/Database.hpp>
-#include <Windows.h>
+#include <QMessageBox>
 
 
 int main(int argc, char *argv[])
@@ -16,12 +16,9 @@ int main(int argc, char *argv[])
     };
 
     if (!backend->connect(host)) {
-        MessageBox(
-            nullptr,
-            L"Could not connect to database host!",
-            L"Error!",
-            MB_OK | MB_ICONERROR
-        );
+        QMessageBox mbox;
+        mbox.setText("Could not connect to database host!");
+        mbox.exec();
         return -1;
     }
 
