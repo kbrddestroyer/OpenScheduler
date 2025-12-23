@@ -25,6 +25,8 @@ namespace Database {
         sql::Driver * driver = nullptr;
         std::unique_ptr<sql::Connection> connection;
     };
+
+    [[nodiscard]] std::shared_ptr<Backend> g_backend_instance();
 }
 
 #endif //BACKEND_HPP

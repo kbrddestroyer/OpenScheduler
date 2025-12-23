@@ -3,6 +3,10 @@ project(OpenScheduler.Client LANGUAGES CXX)
 
 include(qt.cmake)
 
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR}
         COMPONENTS
@@ -12,12 +16,7 @@ find_package(Qt${QT_VERSION_MAJOR}
 )
 qt_standard_project_setup()
 
-set(PROJECT_SOURCES
-        main.cpp
-        OpenScheduler.ui
-        OpenScheduler.h
-        OpenScheduler.cpp
-)
+list_all_sources(PROJECT_SOURCES)
 
 qt_add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
@@ -31,5 +30,6 @@ target_link_libraries(${PROJECT_NAME}
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        login
 )
 

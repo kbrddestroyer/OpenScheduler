@@ -1,10 +1,12 @@
 #include "OpenScheduler.h"
+#include <QVBoxLayout>
 
-OpenScheduler::OpenScheduler(QWidget *parent)
-    : QMainWindow(parent)
-{
-    ui.setupUi(this);
+namespace OpenScheduler {
+    OpenScheduler::OpenScheduler(QWidget *parent)
+        : QMainWindow(parent)
+    {
+        ui.setupUi(this);
+    }
+
+    OpenScheduler::~OpenScheduler() = default;
 }
-
-OpenScheduler::~OpenScheduler()
-{}

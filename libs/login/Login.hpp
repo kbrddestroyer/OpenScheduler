@@ -1,16 +1,11 @@
 #ifndef LOGIN_HPP
 #define LOGIN_HPP
 
-#include <cstdint>
 #include <string>
-
-#if __linux__
 #include <memory>
-#endif
-
-#include <memory>
-
 #include "utils/utility.h"
+#include "compile_utils.h"
+
 
 namespace Login {
     struct Credentials {
@@ -21,14 +16,19 @@ namespace Login {
     /**
      *  Defines class Login that should handle the login process from client side
      */
-    class Login {
+    class DECLSPEC_AUTO Login {
     public:
         Login() = delete;
         explicit Login(const Credentials &);
-    private:
+
         static void doHashPassword(const std::string &, std::string &) noexcept;
+        /*
+         *  TODO: Whole login flow refactor when model is switched to client-server
+         */
+        [[nodiscard]] bool tryLogin() const;
+        [[nodiscard]] bool tryRegister() const;
     private:
-        const std::unique_ptr<Credentials> credentials;
+        const std::unique_ptr<Credentials> credentials_;
     };
 
 } // Login

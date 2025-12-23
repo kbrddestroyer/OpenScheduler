@@ -12,7 +12,7 @@ endfunction()
 
 
 function(list_all_sources result)
-    file(GLOB_RECURSE SOURCES "*.c" "*.cpp")
+    file(GLOB_RECURSE SOURCES "*.c" "*.cpp" "*.ui")
 
     set (${result} ${SOURCES})
     return (PROPAGATE ${result})
@@ -24,9 +24,9 @@ function(list_all_tests name_pattern target_name_return)
     get_filename_component(FOLDER ${CMAKE_CURRENT_SOURCE_DIR} NAME_WE)
     string (TOUPPER ${FOLDER} FOLDER)
 
-    add_executable(TEST_${FOLDER}_TARGET ${TEST_SOURCES} "entry.cpp")
+    add_executable(TEST_${FOLDER}_TARGET ${TEST_SOURCES})
     add_test(NAME TEST_${FOLDER} COMMAND $<TARGET_FILE:TEST_${FOLDER}_TARGET>)
-    target_link_libraries(TEST_${FOLDER}_TARGET PRIVATE ${ARGN})
+    target_link_libraries(TEST_${FOLDER}_TARGET PRIVATE ${ARGN} GTest::gtest GTest::gtest_main)
 
     add_custom_command(TARGET TEST_${FOLDER}_TARGET POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy -t $<TARGET_FILE_DIR:TEST_${FOLDER}_TARGET> $<TARGET_RUNTIME_DLLS:TEST_${FOLDER}_TARGET>
@@ -37,4 +37,17 @@ function(list_all_tests name_pattern target_name_return)
 
     set (${target_name_return} TEST_${FOLDER}_TARGET)
     return (PROPAGATE ${target_name_return})
+endfunction()
+
+function (utils_add_library TARGET_NAME TYPE)
+    # 1. Find library sources
+
+    list_all_sources(SOURCES)
+
+    add_library(
+            ${TARGET_NAME} ${TYPE} ${SOURCES}
+    )
+    target_compile_definitions(
+            ${TARGET_NAME} PUBLIC ${TYPE}
+    )
 endfunction()
