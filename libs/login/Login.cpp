@@ -43,6 +43,9 @@ namespace Login {
             "\'" + this->credentials_->username + "\'"
             );
 
+        if (!dao)
+            return false;
+
         doHashPassword(
             credentials_->raw_password,
             hashed_passwd

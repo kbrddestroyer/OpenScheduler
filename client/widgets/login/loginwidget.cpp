@@ -3,7 +3,7 @@
 #include "loginwidget.hpp"
 
 #include "login/Login.hpp"
-#include <Windows.h>
+#include <QMessageBox>
 // Generated
 #include "ui_LoginWidget.h"
 
@@ -25,18 +25,14 @@ namespace OpenSchedulerUI {
         auto loginEnt = Login::Login(credentials);
 
         if (!loginEnt.tryLogin()) {
-            MessageBox(
-                NULL,
-                L"Login was not successfull!", L"Error!",
-                MB_OK | MB_ICONERROR
-                );
+            QMessageBox mbox;
+            mbox.setText("Could not login!");
+            mbox.exec();
         }
         else {
-            MessageBox(
-                NULL,
-                L"Login was successfull!", L"Ok!",
-                MB_OK | MB_ICONINFORMATION
-            );
+            QMessageBox mbox;
+            mbox.setText("Successfull logon");
+            mbox.exec();
         }
     }
 
