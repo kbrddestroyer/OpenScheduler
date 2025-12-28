@@ -28,6 +28,10 @@ namespace Database {
         return true;
     }
 
+    void Backend::close() const {
+        connection->close();
+    }
+
     std::shared_ptr<sql::ResultSet> Backend::executeQuery(const std::string_view &query) const {
         sql::Statement *stmt = connection->createStatement();
         return std::shared_ptr<sql::ResultSet>( stmt->executeQuery(query.data()) );
@@ -37,11 +41,4 @@ namespace Database {
         sql::Statement *stmt = connection->createStatement();
         return stmt->executeUpdate(query.data());
     }
-
-    std::shared_ptr<Backend> g_backend_instance() {
-        auto inst = Utils::Singleton<Backend>::instance();
-        std::cout << "Obtaining instance " << inst << " " << inst.use_count() << std::endl;
-        return inst;
-    }
-
 }

@@ -4,7 +4,7 @@
 #include <string>
 #include <database/Database.hpp>
 
-#include "Login.hpp"
+#include "table/Dao.hpp"
 
 
 namespace Login {
@@ -14,14 +14,16 @@ class CredentialsDao final : public Database::DAOBase {
 public:
     CredentialsDao() = delete;
     explicit CredentialsDao(const sql::ResultSet * /* rs */);
-    explicit CredentialsDao(const std::string & /* username */, const std::string & /* passwd_sha256 */);
+    explicit CredentialsDao(const std::string & /* username */, const std::string & /* passwd_sha256 */, uint8_t role=0);
 
     [[nodiscard]] const std::string& getUsername() const { return username; }
     [[nodiscard]] const std::string& getHashedPasswd() const { return passwd_sha256; }
+    [[nodiscard]] uint8_t getRole() const { return role; }
     [[nodiscard]] const std::string getUpdateQuery() const override;
 protected:
     std::string username;
     std::string passwd_sha256;
+    uint8_t role;
 };
 
 } // Login
