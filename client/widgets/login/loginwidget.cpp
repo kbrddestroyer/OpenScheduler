@@ -31,7 +31,7 @@ namespace OpenSchedulerUI {
         }
         else {
             QMessageBox mbox;
-            mbox.setText("Successfull logon");
+            mbox.setText("Successful logon");
             mbox.exec();
         }
     }

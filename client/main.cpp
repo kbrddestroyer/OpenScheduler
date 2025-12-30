@@ -7,12 +7,12 @@
 
 int main(int argc, char *argv[])
 {
-    const auto backend = Database::g_backend_instance();
+    const auto backend = Utils::Singleton<Database::Database>::instance();
     const Database::Host host = {
         "localhost:3306",
         "root",
         "root",
-        "unit_tests"
+        "openscheduler_main"
     };
 
     if (!backend->connect(host)) {

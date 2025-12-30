@@ -38,7 +38,7 @@ namespace Login {
         std::string hashed_passwd;
 
         const auto dao = Database::QueryProcessor<CredentialsDao>::selectByPK<std::string>(
-            "test_logins",
+            "login",
             "username",
             "\'" + this->credentials_->username + "\'"
             );
@@ -63,7 +63,7 @@ namespace Login {
             credentials_->username, hashed_passwd
         );
 
-        return Database::QueryProcessor<CredentialsDao>::insert("test_logins", dao);
+        return Database::QueryProcessor<CredentialsDao>::insert("login", dao);
     }
 
 } // Login

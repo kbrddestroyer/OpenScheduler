@@ -5,6 +5,7 @@
 #include <string>
 
 #include <Database.hpp>
+#include <table/Dao.hpp>
 
 
 class TestDAO final : public Database::DAOBase {

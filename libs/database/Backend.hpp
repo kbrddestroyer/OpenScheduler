@@ -16,9 +16,10 @@ namespace Database {
         std::string dbname;
     };
 
-    class Backend : Utils::Singleton<Backend> {
+    class Backend {
     public:
         bool connect(const Host &);
+        void close() const;
         [[nodiscard]] std::shared_ptr<sql::ResultSet> executeQuery(const std::string_view&) const;
         [[nodiscard]] uint32_t executeUpdate(const std::string_view&) const;
     protected:
@@ -26,7 +27,6 @@ namespace Database {
         std::unique_ptr<sql::Connection> connection;
     };
 
-    [[nodiscard]] std::shared_ptr<Backend> g_backend_instance();
 }
 
 #endif //BACKEND_HPP
