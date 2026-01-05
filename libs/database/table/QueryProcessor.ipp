@@ -2,6 +2,7 @@
 
 #include "Dao.hpp"
 #include "Backend.hpp"
+#include "Database.hpp"
 #include <sstream>
 
 #define CHECK_TYPE(TYPE) \
@@ -20,7 +21,7 @@ namespace Database {
         ss << ";";
 
         std::vector<DAO> result;
-        if (const auto rs = g_backend_instance()->executeQuery(ss.str())) {
+        if (const auto rs = Utils::Singleton<Database>::instance()->executeQuery(ss.str())) {
 
             while (rs->next()) {
                 result.push_back(DAO(rs.get()));
@@ -36,7 +37,7 @@ namespace Database {
 
         std::stringstream ss;
         ss << "SELECT * FROM " << tableName << " WHERE " << pkCol << "=" << primary << " LIMIT 1;";
-        if (const auto rs = g_backend_instance()->executeQuery(ss.str()); rs->next()) {
+        if (const auto rs = Utils::Singleton<Database>::instance()->executeQuery(ss.str()); rs->next()) {
             return std::make_shared<DAO>(rs.get());
         }
 
@@ -49,7 +50,7 @@ namespace Database {
 
         std::stringstream ss;
         ss << "INSERT INTO " << tableName << " SET " << object.getUpdateQuery() << ";";
-        return g_backend_instance()->executeUpdate(ss.str()) > 0;
+        return Utils::Singleton<Database>::instance()->executeUpdate(ss.str()) > 0;
     }
 
     template <class DAO>
@@ -59,7 +60,7 @@ namespace Database {
 
         std::stringstream ss;
         ss << "UPDATE " << tableName << " SET " << object.getUpdateQuery() << " WHERE " << pkCol << " = " << primary << " LIMIT 1;";
-        return g_backend_instance()->executeUpdate(ss.str());
+        return Utils::Singleton<Database>::instance()->executeUpdate(ss.str());
     }
 
     template<class DAO>
@@ -69,7 +70,7 @@ namespace Database {
 
         std::stringstream ss;
         ss << "DELETE FROM " << tableName << " WHERE " << pkCol << " = " << primary << " LIMIT 1;";
-        return g_backend_instance()->executeUpdate(ss.str());
+        return Utils::Singleton<Database>::instance()->executeUpdate(ss.str());
     }
 
 } // Database

@@ -1,9 +1,10 @@
 #include <gtest/gtest.h>
-#include <Database.hpp>
+#include <table/QueryProcessor.hpp>
+
 #include "TestDao.hpp"
 
 
-TEST(INTEGRATION_DATABASE, MYSQL_BASIC_TEST) {
+TEST(TEST_DATABASE, MYSQL_BASIC_TEST) {
     const auto backend = Utils::Singleton<Database::Backend>::instance();
     const Database::Host host = {
         "localhost:3306",
@@ -18,7 +19,7 @@ TEST(INTEGRATION_DATABASE, MYSQL_BASIC_TEST) {
 }
 
 
-TEST(INTEGRATION_DATABASE, MYSQL_SELECT_BY_PRIMARY) {
+TEST(TEST_DATABASE, MYSQL_SELECT_BY_PRIMARY) {
     const auto backend = Utils::Singleton<Database::Backend>::instance();
     const Database::Host host = {
         "localhost:3306",
@@ -34,7 +35,7 @@ TEST(INTEGRATION_DATABASE, MYSQL_SELECT_BY_PRIMARY) {
     ASSERT_STREQ("name", dao->getName().c_str());
 }
 
-TEST(INTEGRATION_DATABASE, MYSQL_UPDATE_BY_ID) {
+TEST(TEST_DATABASE, MYSQL_UPDATE_BY_ID) {
     const auto backend = Utils::Singleton<Database::Backend>::instance();
     const Database::Host host = {
         "localhost:3306",
@@ -49,7 +50,7 @@ TEST(INTEGRATION_DATABASE, MYSQL_UPDATE_BY_ID) {
     ASSERT_TRUE(Database::QueryProcessor<TestDAO>::insert("unit_test", dao));
 }
 
-TEST(INTEGRATION_DATABASE, MYSQL_DELETE_BY_KEY) {
+TEST(TEST_DATABASE, MYSQL_DELETE_BY_KEY) {
     const auto backend = Utils::Singleton<Database::Backend>::instance();
     const Database::Host host = {
         "localhost:3306",
