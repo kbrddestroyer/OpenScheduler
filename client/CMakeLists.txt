@@ -15,11 +15,8 @@ find_package(Qt${QT_VERSION_MAJOR}
         Widgets
 )
 qt_standard_project_setup()
-
 list_all_sources(PROJECT_SOURCES)
-
 qt_add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
-
 set_target_properties(${PROJECT_NAME}
         PROPERTIES
         WIN32_EXECUTABLE TRUE
@@ -31,5 +28,11 @@ target_link_libraries(${PROJECT_NAME}
         Qt::Gui
         Qt::Widgets
         login
+        config
 )
 
+add_custom_command(
+        TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_HOME_DIRECTORY}/resources" "${CMAKE_CURRENT_BINARY_DIR}/resources"
+        COMMENT "Copy resources folder near binary"
+)

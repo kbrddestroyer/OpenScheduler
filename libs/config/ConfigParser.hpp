@@ -2,15 +2,23 @@
 #ifndef CONFIGPARSER_HPP
 #define CONFIGPARSER_HPP
 
-#include <fstream>
+#include <regex>
 
 
 namespace Config {
+    typedef std::pair<std::string, std::string> ConfigKVPair;
+
     /**
      * Parses config file by name
      */
-    class ConfigParser {
+    class ConfigValueParser {
+    public:
+        ConfigValueParser() = delete;
+        explicit ConfigValueParser(const std::string &);
 
+        [[nodiscard]] ConfigKVPair parse(const std::string &) const;
+    private:
+        std::regex regexp_;
     };
 
 } // Config

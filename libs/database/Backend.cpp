@@ -29,7 +29,8 @@ namespace Database {
     }
 
     void Backend::close() const {
-        connection->close();
+        if ( driver && connection->isValid() )
+            connection->close();
     }
 
     std::shared_ptr<sql::ResultSet> Backend::executeQuery(const std::string_view &query) const {
