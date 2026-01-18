@@ -12,12 +12,15 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class dataview; }
 QT_END_NAMESPACE
 
-class dataview : public QWidget {
-Q_OBJECT
+class dataview final : public QWidget {
+    Q_OBJECT
 
 public:
     explicit dataview(QWidget *parent = nullptr);
     ~dataview() override;
+
+public slots:
+    void onDateChanged(const QDate & /* date */);
 private:
     Ui::dataview * ui;
     QTableView * table_;

@@ -31,6 +31,30 @@ namespace Database {
     }
 
     template<class DAO>
+    std::vector<DAO> QueryProcessor<DAO>::selectCondition(
+        const std::string_view & tableName,
+        const std::string_view & condition,
+        const size_t limit) {
+        CHECK_TYPE(DAO)
+
+        std::stringstream ss;
+        ss << "SELECT * FROM " << tableName << " WHERE " << condition << " ";
+        if (limit > 0) {
+            ss << "LIMIT " << limit;
+        }
+
+        ss << ";";
+        std::vector<DAO> result;
+        if (const auto rs = Utils::Singleton<Database>::instance()->executeQuery(ss.str())) {
+
+            while (rs->next()) {
+                result.push_back(DAO(rs.get()));
+            }
+        }
+        return result;
+    }
+
+    template<class DAO>
     template<typename PK>
     std::shared_ptr<DAO> QueryProcessor<DAO>::selectByPK(const std::string_view &tableName, const std::string_view &pkCol, const PK primary) {
         CHECK_TYPE(DAO)

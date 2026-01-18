@@ -26,10 +26,57 @@
        </attribute>
       </widget>
      </item>
+     <item>
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QDateEdit" name="dateEdit"/>
+       </item>
+      </layout>
+     </item>
     </layout>
    </item>
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>dateEdit</sender>
+   <signal>userDateChanged(QDate)</signal>
+   <receiver>OpenScheduler::dataview</receiver>
+   <slot>onDateChanged(QDate)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>985</x>
+     <y>650</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>516</x>
+     <y>336</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>onDateChanged(QDate)</slot>
+ </slots>
 </ui>

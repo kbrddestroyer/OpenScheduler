@@ -10,12 +10,25 @@ dataview::dataview(QWidget *parent) :
     ui->setupUi(this);
 
     table_ = ui->tableView;
+
+    ui->dateEdit->setDate(model_.getDate());
+
     table_->setModel( & model_ );
+    table_->horizontalHeader()->setSectionResizeMode( QHeaderView::Stretch );
     table_->resizeColumnsToContents();
+
+    model_.resync();
+
     table_->show();
 }
 
 dataview::~dataview() {
     delete ui;
+}
+
+void dataview::onDateChanged(const QDate & date) {
+    model_.setDate(date);
+    model_.resync();
+    table_->viewport()->update();
 }
 } // OpenScheduler
