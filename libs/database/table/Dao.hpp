@@ -1,6 +1,9 @@
 #ifndef DAO_HPP
 #define DAO_HPP
 
+
+#include <string>
+
 namespace Database {
 
 struct DAOBase {

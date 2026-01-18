@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>OpenSchedulerClass</class>
  <widget class="QMainWindow" name="OpenSchedulerClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>485</width>
+    <height>281</height>
+   </rect>
+  </property>
   <property name="windowTitle">
    <string>OpenScheduler</string>
   </property>
@@ -33,7 +41,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1292</width>
+     <width>485</width>
      <height>22</height>
     </rect>
    </property>

@@ -17,7 +17,10 @@ public:
     ~LoginWidget() override;
 
 public slots:
-    void loginButtonClicked();
+    void loginButtonClicked() const;
+
+private:
+    [[nodiscard]] static bool processLogin( const QString &, const QString & );
 private:
     Ui::LoginWidget *ui;
 };
