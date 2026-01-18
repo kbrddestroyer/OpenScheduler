@@ -39,7 +39,6 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-
     QApplication application(argc, argv);
     OpenScheduler::OpenScheduler w;
     w.show();
