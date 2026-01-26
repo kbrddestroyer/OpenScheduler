@@ -1,4 +1,5 @@
 #include "Backend.hpp"
+
 #include <cppconn/statement.h>
 #include <cppconn/prepared_statement.h>
 #include <cppconn/resultset.h>
@@ -34,12 +35,12 @@ namespace Database {
     }
 
     std::shared_ptr<sql::ResultSet> Backend::executeQuery(const std::string_view &query) const {
-        sql::Statement *stmt = connection->createStatement();
+        const auto stmt = std::unique_ptr<sql::Statement>(connection->createStatement());
         return std::shared_ptr<sql::ResultSet>( stmt->executeQuery(query.data()) );
     }
 
     uint32_t Backend::executeUpdate(const std::string_view &query) const {
-        sql::Statement *stmt = connection->createStatement();
+        const auto stmt = std::unique_ptr<sql::Statement>(connection->createStatement());
         return stmt->executeUpdate(query.data());
     }
 }
