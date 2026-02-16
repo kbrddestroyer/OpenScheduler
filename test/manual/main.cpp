@@ -19,9 +19,6 @@ int main() {
         std::cerr << "Could not connect to database!" << std::endl;
         return -1;
     }
-
-    std::cout << backend.use_count() << std::endl;
-
     std::string username, passwd;
 
     std::cout << "Username: ";
@@ -29,7 +26,7 @@ int main() {
     std::cout << "Password: ";
     std::cin >> passwd;
 
-    if (Login::Login login({username, passwd}); login.tryRegister())
+    if (const Login::Login login({username, passwd}); login.tryRegister())
         std::cout << "Register success!" << std::endl;
     else
         std::cerr << "Could not register account" << std::endl;

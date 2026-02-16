@@ -38,9 +38,11 @@ namespace OpenSchedulerUI {
 
         // Process to main window and destroy current
 
-        auto main_wnd = Utils::Singleton<OpenScheduler::MainWnd>::instance();
+        const auto main_wnd = Utils::Singleton<OpenScheduler::MainWnd>::instance();
         main_wnd->activateWindow();
         main_wnd->show();
+
+        this->window()->close();
     }
 
     bool LoginWidget::processLogin(const QString & login, const QString & password) {

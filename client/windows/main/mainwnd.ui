@@ -18,7 +18,7 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="OpenScheduler::dataview" name="widget" native="true"/>
+       <widget class="CalendarDataView" name="widget" native="true"/>
       </item>
      </layout>
     </item>
@@ -68,9 +68,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>OpenScheduler::dataview</class>
+   <class>CalendarDataView</class>
    <extends>QWidget</extends>
-   <header>widgets/data_view/dataview.hpp</header>
+   <header>widgets/calendar/calendardataview.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
