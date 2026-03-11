@@ -7,7 +7,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
+find_package(QT NAMES Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 6.5 COMPONENTS Quick REQUIRED)
 
 find_package(Qt${QT_VERSION_MAJOR}
@@ -29,10 +29,9 @@ set_target_properties(${PROJECT_NAME}
 )
 target_link_libraries(${PROJECT_NAME}
         PUBLIC
-        Qt::Core
-        Qt::Gui
-        Qt::Widgets
-        Qt6::Quick
+        Qt6::Core
+        Qt6::Gui
+        Qt6::Widgets
         login
         config
 )
