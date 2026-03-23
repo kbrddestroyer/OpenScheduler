@@ -1,39 +1,40 @@
-
 #ifndef RECORDDAO_HPP
 #define RECORDDAO_HPP
 
-#include <Database.hpp>
-#include "table/Dao.hpp"
-#include <compile_utils.h>
+#include <database/table/Dao.hpp>
+#include <string>
 
-namespace OpenScheduler {
+namespace sql {
+    class ResultSet;
+}
 
-class RecordDao : public Database::DAOBase {
-public:
-    RecordDao() = delete;
+namespace OpenScheduler::Dao{
 
-    explicit RecordDao(const sql::ResultSet * rs);
-    explicit RecordDao(std::uint32_t customer, std::time_t start, std::time_t end, std::string comment = "") :
-        customer_id_(customer),
-        start_(start),
-        end_(end),
-        comment_(comment)
-    {}
+    class RecordDao final : public Database::DAOBase {
+    public:
+        RecordDao() = delete;
+        explicit RecordDao(const sql::ResultSet * /* rs */);
 
-    GETTER (std::uint32_t ID()) { return id_; }
-    GETTER (std::uint32_t CUSTOMER()) { return customer_id_; }
-    GETTER (std::time_t START()) { return start_; }
-    GETTER (std::time_t END()) { return end_; }
-    GETTER (std::string COMMENT()) { return comment_; }
-    GETTER (const std::string getUpdateQuery()) override;
-private:
-    std::uint32_t   id_ = 0;
-    std::uint32_t   customer_id_;
-    std::time_t     start_;
-    std::time_t     end_;
-    std::string     comment_ = "";
-};
+        explicit RecordDao( uint16_t visitor, std::string start, std::string end, std::string comment = "" ) :
+            visitor_id_(visitor), start_(std::move(start)), end_(std::move(end)), comment_(std::move(comment))
+        {}
 
-} // OpenScheduler
+        uint16_t ID() const { return id_; }
+        uint16_t VISITOR() const { return visitor_id_; }
+        const std::string & START() const { return start_; }
+        const std::string & END() const { return end_; }
+        const std::string & COMMENT() const { return comment_; }
+
+        [[nodiscard]] const std::string getUpdateQuery() const override;
+
+    private:
+        uint16_t id_ = 0;
+        uint16_t visitor_id_;
+        std::string start_;
+        std::string end_;
+        std::string comment_;
+    };
+
+}
 
 #endif //RECORDDAO_HPP

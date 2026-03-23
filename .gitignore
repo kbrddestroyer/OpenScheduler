@@ -430,3 +430,4 @@ pyenv/
 
 # Conan output
 conan/
+examples/
