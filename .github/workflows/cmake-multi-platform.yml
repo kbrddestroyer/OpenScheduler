@@ -10,7 +10,7 @@ on:
     
 env:
   SOURCE_DIR:   ${{ github.workspace }}
-  QT_VERSION:   5.15.2
+  QT_VERSION:   6.2.0
   
 jobs:
   build:
