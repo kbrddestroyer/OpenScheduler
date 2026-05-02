@@ -16,7 +16,7 @@ namespace OpenScheduler::Dao {
     const std::string RecordDao::getUpdateQuery() const {
         return std::format(
             "visitor_id={}, start=\"{}\", end=\"{}\", comment=\"{}\"",
-            visitor_id_, start_.toString().toStdString(), end_.toString().toStdString(), comment_
+            visitor_id_, start_.toString("yyyy-MM-dd hh:mm:ss").toStdString(), end_.toString("yyyy-MM-dd HH:mm:ss").toStdString(), comment_
         );
     }
 
