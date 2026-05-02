@@ -2,7 +2,7 @@
 // You may need to build the project (run Qt uic code generator) to get "ui_MainWnd.h" resolved
 
 #include "mainwnd.hpp"
-#include "ui_MainWnd.h"
+#include "ui_mainwnd.h"
 
 namespace OpenScheduler {
 MainWnd::MainWnd(QWidget *parent) :

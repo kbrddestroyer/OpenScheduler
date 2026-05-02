@@ -17,6 +17,7 @@ public:
 
 public slots:
     void loginButtonClicked() const;
+    void registerButtonClicked();
 
 private:
     [[nodiscard]] static bool processLogin( const QString &, const QString & );

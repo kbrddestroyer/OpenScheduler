@@ -12,14 +12,18 @@ namespace Database {
 
         if (!driver)
             return false;
-
-        this->connection = std::unique_ptr<sql::Connection>(
-            driver->connect(
-                host.hostname,
-                host.username,
-                host.password
-            )
-        );
+        try {
+            this->connection = std::unique_ptr<sql::Connection>(
+                driver->connect(
+                    host.hostname,
+                    host.username,
+                    host.password
+                )
+            );
+        }
+        catch (sql::SQLException &e) {
+            return false;
+        }
 
         if (!connection)
             return false;

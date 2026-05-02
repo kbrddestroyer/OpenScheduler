@@ -18,9 +18,10 @@ if (WIN32)
         set (MYSQL_DLL_PATH ${MYSQL_DLL_PATH}\\debug)
     endif()
 else()
-    # TODO:
-    # Create Linux config
-    # or port this garbage to find_package instruction
+    set (MYSQL_LIB_PATH ${MYSQL_CONNECTOR_DIRECTORY}/lib64)
+    set (MYSQL_DLL_PATH ${MYSQL_CONNECTOR_DIRECTORY}/lib64)
+
+    set (MYSQL_INCLUDE_ROOT ${MYSQL_CONNECTOR_DIRECTORY}/include)
 endif()
 
 set (MYSQL_LIB_PATH ${MYSQL_LIB_PATH} PARENT_SCOPE)

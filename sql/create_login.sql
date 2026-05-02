@@ -1,4 +1,4 @@
-CREATE TABLE `login` (
+CREATE TABLE `openscheduler_main`.`login` (
      `username` varchar(256) NOT NULL,
      `passwd_sha256` varchar(256) NOT NULL,
      `role` int NOT NULL DEFAULT '0',

@@ -53,7 +53,7 @@ size_t get_md_size() {
 #if defined(WIN32)
 #pragma comment (linker, "/export:hash_passwd")
 #endif
-uint8_t hash_passwd(void * hashed_output, uint32_t * size) {
+uint8_t hash_passwd(unsigned char * hashed_output, uint32_t * size) {
     EVP_MD_CTX * ctx = get_context(false);
 
     if ( EVP_DigestFinal_ex(ctx, hashed_output, size) != 1 ) {

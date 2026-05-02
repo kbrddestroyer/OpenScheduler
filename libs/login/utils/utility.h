@@ -3,6 +3,7 @@
 
 #include <openssl/evp.h>
 #include <stdbool.h>
+#include <stdint.h>
 
 #if __cplusplus
 extern "C" {
