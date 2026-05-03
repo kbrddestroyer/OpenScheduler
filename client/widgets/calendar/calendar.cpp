@@ -13,7 +13,7 @@ namespace OpenScheduler {
     CalendarWidget::CalendarWidget(QWidget *parent)
             : QWidget(parent)
     {
-        QVBoxLayout *layout = new QVBoxLayout(this);
+        auto *layout = new QVBoxLayout(this);
 
         calendar = new QCalendarWidget(this);
 
@@ -47,7 +47,9 @@ namespace OpenScheduler {
         events.clear();
         auto vecRecords = Database::QueryProcessor<Dao::RecordDao>::selectCondition(
                 "record",
-                std::format("DATE(start)=\"{}\"", date.toString("yyyy-MM-dd").toStdString())
+                std::format("DATE(start)=\"{}\" or DATE(end)=\"{}\"",
+                            date.toString("yyyy-MM-dd").toStdString(),
+                            date.toString("yyyy-MM-dd").toStdString())
             );
 
         for ( const auto &record : vecRecords )

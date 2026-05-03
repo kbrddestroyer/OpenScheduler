@@ -1,7 +1,7 @@
 #ifndef RECORDDAO_HPP
 #define RECORDDAO_HPP
 
-#include <database/table/Dao.hpp>
+#include "database/table/Dao.hpp"
 #include <string>
 #include <QDateTime>
 
@@ -28,9 +28,11 @@ namespace OpenScheduler::Dao{
         [[nodiscard]] const std::string getUpdateQuery() const override;
     private:
         static QDateTime stringToTime( const std::string & /* data */ );
+        static std::string timeToString( const QDateTime & /* datetime */ );
     private:
         uint16_t id_ = 0;
         uint16_t visitor_id_;
+        uint16_t assignee_id_;
         QDateTime start_;
         QDateTime end_;
         std::string comment_;
