@@ -22,7 +22,7 @@ namespace OpenScheduler::Dao {
     }
 
     std::string RecordDao::timeToString(const QDateTime &datetime) {
-        return datetime.toString("yyyy-MM-dd hh:mm:ss").toStdString()
+        return datetime.toString("yyyy-MM-dd hh:mm:ss").toStdString();
     }
 
     QDateTime RecordDao::stringToTime(const std::string & data) {

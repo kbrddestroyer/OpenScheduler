@@ -3,7 +3,7 @@
 #include <QHeaderView>
 #include <QtMath>
 
-#include "widgets/data_view/dao/RecordDao.hpp"
+#include "dao/RecordDao.hpp"
 #include "table/QueryProcessor.hpp"
 #include <database/Database.hpp>
 #include <format>
