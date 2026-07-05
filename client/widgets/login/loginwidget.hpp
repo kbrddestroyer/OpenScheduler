@@ -10,14 +10,14 @@ namespace Ui { class LoginWidget; }
 QT_END_NAMESPACE
 
 class LoginWidget : public QWidget {
-Q_OBJECT
-
+    Q_OBJECT
 public:
     explicit LoginWidget(QWidget *parent = nullptr);
     ~LoginWidget() override;
 
 public slots:
     void loginButtonClicked() const;
+    void registerButtonClicked();
 
 private:
     [[nodiscard]] static bool processLogin( const QString &, const QString & );

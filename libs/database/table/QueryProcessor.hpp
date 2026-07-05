@@ -11,6 +11,8 @@ class QueryProcessor final {
 public:
     static std::vector<DAO> select(const std::string_view &tableName, size_t limit = 0);
 
+    static std::vector<DAO> selectCondition( const std::string_view & tableName, const std::string_view & condition, size_t limit = 0 );
+
     template <typename PK>
     static std::shared_ptr<DAO> selectByPK(const std::string_view &tableName, const std::string_view & pkCol, PK primary);
 

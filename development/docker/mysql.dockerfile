@@ -1,0 +1,7 @@
+FROM mysql:latest
+ENV MYSQL_DATABASE=mydb
+
+
+
+EXPOSE 3306
+EXPOSE 33060

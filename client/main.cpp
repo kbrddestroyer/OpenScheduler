@@ -32,6 +32,10 @@ int main(int argc, char *argv[])
         db_config.SCHEMA()
     };
 
+    QApplication application(argc, argv);
+    OpenScheduler::OpenScheduler w;
+    w.show();
+
     if (!backend->connect(host)) {
         QMessageBox mbox;
         mbox.setText("Could not connect to database host!");
@@ -39,8 +43,5 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    QApplication application(argc, argv);
-    OpenScheduler::OpenScheduler w;
-    w.show();
     return application.exec();
 }

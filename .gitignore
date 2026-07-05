@@ -430,3 +430,7 @@ pyenv/
 
 # Conan output
 conan/
+
+# I made this folder on my linux, cuz I don't want it in my system directories
+third-party/
+examples/
