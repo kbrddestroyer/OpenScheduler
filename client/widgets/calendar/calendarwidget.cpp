@@ -4,6 +4,8 @@
 #include "dao/RecordDao.hpp"
 #include "table/QueryProcessor.hpp"
 #include "dialog/records_crud_popup/create/createrecorddialog.hpp"
+#include "dao/RecordDao.hpp"
+#include "registry/g_registry.hpp"
 
 #include <QDialog>
 #include <format>
@@ -16,16 +18,34 @@ namespace OpenScheduler {
         setupTable();
         connect(ui->calendar, &QCalendarWidget::selectionChanged, this, &CalendarWidget::updateView);
         connect(ui->table, &QTableWidget::cellDoubleClicked, this, &CalendarWidget::onCellDoubleClicked);
+
+        auto * assigneePicker = ui->worker;
+
+        for ( const Dao::WorkerDao &dao : g_workers ) {
+            assigneePicker->addItem(QString::fromStdString(dao.DISPLAY_NAME()));
+        }
         updateView();
     }
 
     void CalendarWidget::fetchByDate(const QDate &date) {
         events_.clear();
+
+        uint16_t assignee_id = 0;
+
+        for ( const Dao::WorkerDao &dao : g_workers ) {
+            if (dao.DISPLAY_NAME() == ui->worker->currentText())
+            {
+                assignee_id = dao.ID();
+                break;
+            }
+        }
+
         auto vecRecords = Database::QueryProcessor<Dao::RecordDao>::selectCondition(
                 "record",
-                std::format("DATE(start)=\"{}\" or DATE(end)=\"{}\"",
+                std::format("DATE(start)=\"{}\" or DATE(end)=\"{}\" and assignee_id={}",
                             date.toString("yyyy-MM-dd").toStdString(),
-                            date.toString("yyyy-MM-dd").toStdString())
+                            date.toString("yyyy-MM-dd").toStdString(),
+                            assignee_id)
         );
 
         for ( const auto &record : vecRecords )
@@ -33,7 +53,6 @@ namespace OpenScheduler {
             events_.append({ record.START(), record.END(), QString::fromStdString(record.COMMENT()) });
         }
     }
-
 
     void CalendarWidget::updateView() {
         this->fetchByDate(ui->calendar->selectedDate());
@@ -58,7 +77,7 @@ namespace OpenScheduler {
                     e.end_.time().toString("HH:mm") + "\n" + e.text_
             );
 
-            item->setBackground(Qt::cyan);
+            item->setBackground(Qt::darkRed);
 
             ui->table->setItem(rowStart, 0, item);
             ui->table->setSpan(rowStart, 0, rowSpan, 1);

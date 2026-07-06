@@ -20,7 +20,7 @@
       <enum>QLayout::SizeConstraint::SetMinimumSize</enum>
      </property>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,2">
+      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,0,0,0">
        <property name="sizeConstraint">
         <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
        </property>
@@ -33,6 +33,16 @@
           </size>
          </property>
         </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="add_cusomer_btn">
+         <property name="text">
+          <string>Add Customer</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="worker"/>
        </item>
        <item>
         <spacer name="verticalSpacer">
