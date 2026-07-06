@@ -37,7 +37,13 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionNew"/>
+    <widget class="QMenu" name="menuRecords">
+     <property name="title">
+      <string>Records</string>
+     </property>
+     <addaction name="actionAdd"/>
+    </widget>
+    <addaction name="menuRecords"/>
     <addaction name="actionForce_sync_with_database"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
@@ -55,14 +61,14 @@
     <string>Add record</string>
    </property>
   </action>
-  <action name="actionNew">
-   <property name="text">
-    <string>New</string>
-   </property>
-  </action>
   <action name="actionForce_sync_with_database">
    <property name="text">
     <string>Force sync with database</string>
+   </property>
+  </action>
+  <action name="actionAdd">
+   <property name="text">
+    <string>Add</string>
    </property>
   </action>
  </widget>
@@ -70,7 +76,7 @@
   <customwidget>
    <class>OpenScheduler::CalendarWidget</class>
    <extends>QWidget</extends>
-   <header>widgets/calendar/calendar.hpp</header>
+   <header>widgets/calendar/calendarwidget.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -16,12 +16,13 @@ namespace OpenScheduler::Dao{
         RecordDao() = delete;
         explicit RecordDao(const sql::ResultSet * /* rs */);
 
-        RecordDao( uint16_t visitor, QDateTime start, QDateTime end, std::string comment = "" ) :
-            visitor_id_(visitor), start_(std::move(start)), end_(std::move(end)), comment_(std::move(comment))
+        RecordDao( uint16_t visitor, uint16_t assignee_id, QDateTime start, QDateTime end, std::string comment = "" ) :
+            visitor_id_(visitor), assignee_id_(assignee_id), start_(std::move(start)), end_(std::move(end)), comment_(std::move(comment))
         {}
 
         [[nodiscard]] uint16_t ID() const { return id_; }
         [[nodiscard]] uint16_t VISITOR() const { return visitor_id_; }
+        [[nodiscard]] uint16_t ASSIGNEE() const { return assignee_id_; }
         [[nodiscard]] const QDateTime & START() const { return start_; }
         [[nodiscard]] const QDateTime & END() const { return end_; }
         [[nodiscard]] const std::string & COMMENT() const { return comment_; }
