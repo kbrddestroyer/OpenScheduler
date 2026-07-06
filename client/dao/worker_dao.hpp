@@ -41,6 +41,9 @@ namespace OpenScheduler::Dao {
                 );
 
         [[nodiscard]] const std::string getUpdateQuery() const override;
+        [[nodiscard]] std::string DISPLAY_NAME() const { return name_ + " " + surname_; }
+        [[nodiscard]] uint16_t ID() const { return id_; }
+        [[nodiscard]] WorkerType TYPE() const { return type_; }
     private:
         std::uint16_t id_ = 0;
         std::uint16_t login_id_;

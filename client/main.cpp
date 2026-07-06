@@ -6,6 +6,7 @@
 #include <QMessageBox>
 
 #include "config/DatabaseConfig.hpp"
+#include "registry/g_registry.hpp"
 
 
 int main(int argc, char *argv[])
@@ -42,6 +43,8 @@ int main(int argc, char *argv[])
         mbox.exec();
         return -1;
     }
+
+    OpenScheduler::sync_global_registry();
 
     return application.exec();
 }
